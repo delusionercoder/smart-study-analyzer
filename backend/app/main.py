@@ -2,13 +2,13 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from datetime import datetime
 from typing import List
-from .routes import study
+
+from .db import collection
+
+# FastAPI app
 app = FastAPI()
 
-# Temporary in-memory list to store topics
-topics = []
-app.include_router(study.router)
-# Topic model
+# Topic model (Pydantic)
 class Topic(BaseModel):
     name: str
     added_at: datetime
@@ -19,11 +19,17 @@ class Topic(BaseModel):
 def home():
     return {"message": "Smart Study Scheduler backend is running!"}
 
+# Endpoint to add a topic
 @app.post("/topics")
-def add_topic(topic: Topic):
-    topics.append(topic)
-    return {"message": "Topic added successfully", "topic": topic}
+async def add_topic(topic: Topic):
+    topic_dict = topic.dict()
+    topic_dict["added_at"] = topic.added_at.isoformat()  # Convert datetime to string for storage
+    result = await collection.insert_one(topic_dict)  # Insert into MongoDB
+    return {"message": "Topic added successfully", "topic_id": str(result.inserted_id)}
 
-@app.get("/topics")
-def get_topics():
-    return topics
+# Endpoint to fetch topics
+@app.get("/topics", response_model=List[Topic])
+async def get_topics():
+    topics_cursor = collection.find()  # Fetch all topics from MongoDB
+    topics_list = await topics_cursor.to_list(length=100)  # Get top 100 topics (or limit as per need)
+    return topics_list

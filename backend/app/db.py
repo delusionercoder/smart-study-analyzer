@@ -1,8 +1,11 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 
-MONGO_DETAILS = "mongodb://localhost:27017"  # or your Atlas URI
+# MongoDB URI and database setup
+MONGO_URI = "mongodb://localhost:27017"  # Replace with your Compass URI if using cloud MongoDB
+DB_NAME = "smartStudyAnalyzer"
+COLLECTION_NAME = "topics"  # You can change this to match the correct collection name
 
-client = AsyncIOMotorClient(MONGO_DETAILS)
-database = client.study_scheduler
-
-study_collection = database.get_collection("study_sessions")
+# Create an AsyncIOMotorClient instance and access the database and collection
+client = AsyncIOMotorClient(MONGO_URI)
+db = client[DB_NAME]
+collection = db[COLLECTION_NAME]
