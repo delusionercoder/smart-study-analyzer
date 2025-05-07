@@ -1,6 +1,9 @@
+// router.js
 import { createRouter, createWebHistory } from 'vue-router';
-import HomePage from './components/HomePage.vue';
-import StudySchedule from './components/StudySchedule.vue';
+import HomePage from './components/HomePage.vue'; // Adjust paths if necessary
+import StudySchedule from './components/StudySchedule.vue'; // Adjust paths if necessary
+import AddTopic from './components/AddTopic.vue'; // Adjust paths if necessary
+import ShowTopics from './components/ShowTopics.vue'; // Adjust paths if necessary
 
 const routes = [
   {
@@ -13,11 +16,20 @@ const routes = [
     name: 'StudySchedule',
     component: StudySchedule,
   },
-  
+  {
+    path: '/add-topic',
+    name: 'AddTopic',
+    component: AddTopic,
+  },
+  {
+    path: '/show-topics',
+    name: 'ShowTopics',
+    component: ShowTopics,
+  },
 ];
 
 const router = createRouter({
-  history: createWebHistory("/"),
+  history: createWebHistory('/'),
   routes,
 });
 
