@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "bootstrap": "^5.3.5"
+    "bootstrap": "^5.3.5",
+    "vue-graph": "^0.9.3"
   },
   "devDependencies": {
     "sass": "^1.86.3"

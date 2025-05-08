@@ -1,7 +1,7 @@
 // router.js
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from './components/HomePage.vue'; // Adjust paths if necessary
-import StudySchedule from './components/StudySchedule.vue'; // Adjust paths if necessary
+import OneDayStudyPlan from './components/OneDayStudyPlan.vue'; // Adjust paths if necessary
 import AddTopic from './components/AddTopic.vue'; // Adjust paths if necessary
 import ShowTopics from './components/ShowTopics.vue'; // Adjust paths if necessary
 
@@ -13,8 +13,8 @@ const routes = [
   },
   {
     path: '/schedule',
-    name: 'StudySchedule',
-    component: StudySchedule,
+    name: 'OneDayStudyPlan',
+    component: OneDayStudyPlan,
   },
   {
     path: '/add-topic',
